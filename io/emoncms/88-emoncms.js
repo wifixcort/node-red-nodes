@@ -19,7 +19,7 @@ module.exports = function(RED) {
         var sc = RED.nodes.getNode(this.emonServer);
 
         this.baseurl = sc.server;
-        this.apikey = sc.credentials.apikey;
+//        this.apikey = sc.credentials.apikey;
 
         this.nodegroup = n.nodegroup || "";
         this.datatype = n.datatype || "";
@@ -29,6 +29,10 @@ module.exports = function(RED) {
         else { http = require("http"); }
         this.on("input", function(msg) {
 
+			if(sc.credentials.apikey === undefined){
+				sc.credentials.apikey = msg.apikey;
+			}
+			this.apikey = sc.credentials.apikey;
             // setup the data for the URI
             if (this.datatype == "legacy"){
                 this.url = this.baseurl + '/input/post.json?';
