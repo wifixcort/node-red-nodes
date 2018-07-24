@@ -33,6 +33,7 @@ module.exports = function(RED) {
 				sc.credentials.apikey = msg.apikey;
 			}
 			this.apikey = sc.credentials.apikey;
+			
             // setup the data for the URI
             if (this.datatype == "legacy"){
                 this.url = this.baseurl + '/input/post.json?';
